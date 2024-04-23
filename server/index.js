@@ -3,6 +3,8 @@ const app =  express();
 const mysql = require('mysql');
 const cors = require('cors');
 
+const port = process.env.PORT || 3001;
+
 app.use(cors());
 app.use(express.json());
 // npm install axios, express, mysql
@@ -87,6 +89,6 @@ app.delete("/delete/:id",(req,res) =>{
 
 
 
-app.listen(3001, () =>{
+app.listen(port, () =>{
     console.log("Corriendo en el puerto 3001")
 })
