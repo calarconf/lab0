@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const port = process.env.PORT || 3001;
+require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
@@ -13,10 +14,10 @@ app.use(express.json());
 // Se crea conexión
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root123",
-    database: "usuarios_crud"
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "root123",
+    database: process.env.DB_NAME || "usuarios_crud"
 });
 // Guardar en la base de datos
 app.post("/create",(req,res) =>{

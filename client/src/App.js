@@ -26,7 +26,7 @@ function App() {
 
 
   const add = () => {
-    axios.post("http://localhost:3001/create", {
+    axios.post(process.env.API_URL + "create", {
       nombre: nombre,
       edad: edad,
       pais: pais,
@@ -52,7 +52,7 @@ function App() {
   }
   //Actualizar
   const update = () => {
-    axios.put("http://localhost:3001/update", {
+    axios.put(process.env.API_URL + "update", {
       id: id,
       nombre: nombre,
       edad: edad,
@@ -89,7 +89,7 @@ function App() {
       confirmButtonText: "Sí, eliminarlo!"
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3001/delete/${val.id}`).then(() => {
+        axios.delete(process.env.API_URL+`/delete/${val.id}`).then(() => {
         getUsuarios();
         limpiarCampos();
         Swal.fire({
@@ -138,7 +138,7 @@ function App() {
   }
 
   const getUsuarios = () => {
-    axios.get("http://localhost:3001/usuarios",).then((response) => {
+    axios.get(process.env.API_URL + "usuarios",).then((response) => {
       setUsuariosList(response.data);
     })
     .catch((error) => {
