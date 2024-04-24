@@ -7,11 +7,8 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Swal from 'sweetalert2'
 import { BrowserRouter } from 'react-router-dom';
-// import withReactContent from 'sweetalert2-react-content'
-require('dotenv').config();
 
-
-
+const apiUrl = import.meta.env.VITE_REACT_APP_BACK_URL;
 
 function App() {
   const [nombre, setNombre] = useState("");
@@ -23,11 +20,10 @@ function App() {
   const [editar, setEditar] = useState(false);
   const [usuariosList, setUsuariosList] = useState([]);
   // const noti = withReactContent(Swal)
-  console.log("corriendo")
-  console.log(process.env.BACK_API_URL);
-
+  //console.log(apiUrl);
+  
   const add = () => {
-    axios.post(process.env.API_URL + "create", {
+    axios.post(apiUrl + "create", {
       nombre: nombre,
       edad: edad,
       pais: pais,
@@ -53,7 +49,7 @@ function App() {
   }
   //Actualizar
   const update = () => {
-    axios.put(process.env.API_URL + "update", {
+    axios.put(apiUrl + "update", {
       id: id,
       nombre: nombre,
       edad: edad,
@@ -90,7 +86,7 @@ function App() {
       confirmButtonText: "Sí, eliminarlo!"
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(process.env.API_URL+`/delete/${val.id}`).then(() => {
+        axios.delete(apiUrl + `delete/${val.id}`).then(() => {
         getUsuarios();
         limpiarCampos();
         Swal.fire({
@@ -139,7 +135,7 @@ function App() {
   }
 
   const getUsuarios = () => {
-    axios.get(process.env.API_URL + "usuarios",).then((response) => {
+    axios.get(apiUrl + "usuarios",).then((response) => {
       setUsuariosList(response.data);
     })
     .catch((error) => {
