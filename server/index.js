@@ -12,13 +12,16 @@ app.use(express.json());
 // npm install cors
 // npm install react-router-dom
 // Se crea conexión
+const urlDB =  `mysql://root:EyiDmGNrajKDGOcqQvIyTTeKrvotKyCJ@viaduct.proxy.rlwy.net:31718/railway`
 
-const db = mysql.createConnection({
-    host: process.env.DB_HOST || "localhost",
-    user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "root123",
-    database: process.env.DB_NAME || "usuarios_crud"
-});
+const db = mysql.createConnection(urlDB
+    // {
+    // host: process.env.DB_HOST || "localhost",
+    // user: process.env.DB_USER || "root",
+    // password: process.env.DB_PASSWORD || "root123",
+    // database: process.env.DB_NAME || "usuarios_crud"
+// }
+);
 // Guardar en la base de datos
 app.post("/create",(req,res) =>{
     const nombre = req.body.nombre;
